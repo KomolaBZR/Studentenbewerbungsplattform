@@ -1,0 +1,230 @@
+# Test 1: Abrufen der User beim Start über /publicUser - TRUE(200)
+GET https://localhost/api/publicUsers
+
+# Test 2: Authentication mit dem Administrator - TRUE(200)
+###
+# @name loginAdminCorrect
+GET https://localhost/api/authenticate
+Authorization: Basic YWRtaW46MTIz
+
+# Test 3: Authentifizierung mit falschen Credential - FALSE (401)
+###
+GET https://localhost/api/authenticate
+Authorization: Basic YXNkZjphc2Rm
+
+###
+GET https://localhost/api/authenticate
+Authorization: Basic admin:123
+
+@adminToken = {{loginAdminCorrect.response.headers.Authorization}}
+
+#Test 4: Abrufen der User ohne Token - FALSE (401)
+###
+GET https://localhost/api/users
+
+#Test 5: Abrufen der User mit Token - TRUE(200)
+###
+GET https://localhost/api/users
+Authorization: {{adminToken}}
+
+# Test 6: Abrufen des Administrators - TRUE(200)
+###
+GET https://localhost/api/users/admin
+Authorization: {{adminToken}}
+
+# Test 7: Administrator erneut anlegen - FALSE (400)
+###
+POST https://localhost/api/users
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "firstName" : "Udo",
+    "lastName" : "Müller",
+    "password" : "123",
+    "isAdministrator" : true,
+    "userID" : "admin"
+}
+
+# Test 8: Zweiten Nutzer ohne Token anlegen - FALSE (401)
+### 
+POST https://localhost/api/users
+Content-Type: application/json
+
+{
+    "firstName" : "Manfred",
+    "lastName" : "Mustermann",
+    "password" : "asdf",
+    "isAdministrator" : false,
+    "userID" : "manfred"
+}
+
+# Test 9: Zweiten Nutzer mit Token anlegen - TRUE(201)
+###
+POST https://localhost/api/users
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "firstName" : "Manfred",
+    "lastName" : "Mustermann",
+    "password" : "asdf",
+    "isAdministrator" : false,
+    "userID" : "manfred"
+}
+
+# Test 10: Abrufen des zweiten Users - TRUE(200)
+###
+GET https://localhost/api/users/manfred
+Authorization: {{adminToken}}
+
+
+# Test 11: Anlegen von User ohne User-ID - FALSE (400)
+###
+
+POST https://localhost:80/api/users
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "firstName" : "Alonso",
+    "lastName" : "Ferari",
+    "password" : "as"
+}
+
+
+# Test 12: Authentication mit dem User Manfred - TRUE(200)
+###
+# @name loginManfredCorrect
+GET https://localhost/api/authenticate
+Authorization: Basic bWFuZnJlZDphc2Rm
+
+@manfredToken = {{loginManfredCorrect.response.headers.Authorization}}
+
+# Test 13: Zweiten Nutzer aktualisieren - TRUE(200)
+###
+PUT https://localhost/api/users/manfred
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "password" : "aaa"
+}
+
+# Test 14: Login als manfred mit geänderten Passwort - TRUE(200)
+###
+GET https://localhost/api/authenticate
+Authorization: Basic bWFuZnJlZDphYWE=
+
+# Test 15: Abrufen der Studiengänge - TRUE(200)
+###
+GET http://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+
+# Test 16: Studiengang ohne Token anlegen - FALSE (401)
+###
+POST https://localhost/api/degreeCourses
+Content-Type: application/json
+
+{
+    "universityName" : "Berliner Hochschule für Technik",
+    "universityShortName" : "BHT",
+    "departmentName" : "Informatik und Medien",
+    "departmentShortName" : "FB VI",
+    "name" : "Orchideenzucht Bachelor",
+    "shortName" : "OZ-BA"
+}
+
+# Test 17: Studiengang mit Token anlegen - TRUE(201)
+###
+# @name createDegreeCourseRequest
+POST https://localhost/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName" : "Berliner Hochschule für Technik",
+    "universityShortName" : "BHT",
+    "departmentName" : "Informatik und Medien",
+    "departmentShortName" : "FB VI",
+    "name" : "Orchideenzucht Bachelor",
+    "shortName" : "OZ-BA"
+}
+
+###
+@degreeCourseID = {{createDegreeCourseRequest.response.body.id}}
+
+
+# Test 17.1: Studiengang mit Token anlegen - FALSE(401)
+###
+POST https://localhost/api/degreeCourses
+Authorization: {{manfredToken}}
+Content-Type: application/json
+
+{
+    "universityName" : "Berliner Hochschule für Technik",
+    "universityShortName" : "BHT",
+    "departmentName" : "Mathematik",
+    "departmentShortName" : "FB V",
+    "name" : "Bachelor",
+    "shortName" : "OA"
+}
+
+# Test 18: Abrufen des Studiengang - TRUE(200)
+###
+GET https://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{adminToken}}
+
+# Test 19: Studiengang aktualisieren - TRUE(200)
+###
+PUT https://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "name" : "Tuplenzucht Bachelor"
+}
+
+# Test 20: Abrufen von Studiengägen über Suchparameter - TRUE(200)
+###
+GET https://localhost/api/degreeCourses?universityShortName=BHT
+Authorization: {{adminToken}}
+
+# Test 21: Löschen des Studiengangs - TRUE(204)
+###
+DELETE https://localhost/api/degreeCourses/{{degreeCourseID}}
+Authorization: {{adminToken}}
+
+# Test 22: Abrufen eines nicht-existenten Users - FALSE(404)
+###
+GET https://localhost/api/users/asdfasdf
+Authorization: {{adminToken}}
+
+# Test 23: Löschen des Users manfred ohne Token - FALSE(401)
+###
+DELETE https://localhost/api/users/manfred
+
+# Test 24: Löschen des Users manfred - TRUE(204)
+###
+DELETE https://localhost/api/users/manfred
+Authorization: {{adminToken}}
+
+# Test 25: Prüfe, ob manfred gelöscht ist. - FALSE(404)
+###
+GET https://localhost/api/users/manfred
+Authorization: {{adminToken}}
+
+# Test 26: Löschen eines nicht-existenten Users - FALSE(404)
+###
+DELETE https://localhost/api/users/asdfasdf
+Authorization: {{adminToken}}
+
+# Test 27: Aktualisieren eines nicht-existenten Users - False (400)
+###
+PUT https://localhost/api/users/asdfasdf
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "password" : "aaa"
+}

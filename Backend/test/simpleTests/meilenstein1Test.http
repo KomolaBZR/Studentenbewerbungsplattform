@@ -1,0 +1,157 @@
+// Rufe alle User ab. Zu Beginn sollten keine User in der Datenbank sein. 
+###
+GET http://localhost/api/publicUsers
+
+// Failed Test - Rufe alle User ab. Zu Beginn sollten keine User in der Datenbank sein. 
+###
+GET http://localhost/api/publicUser
+
+
+// Lege ersten User an, der Administrator ist
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "admin",
+    "firstName": "Udo",
+    "lastName": "Müller",
+    "password": "123",
+    "isAdministrator": true
+}
+
+//Failed Test - Lege ersten User an, der Administrator ist
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "firstName": "Udo",
+    "lastName": "Müller",
+    "password": "123",
+    "isAdministrator": true
+}
+
+
+// Failed Test - Lege ersten User an, der Administrator ist
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "lala",
+    "firstName": "Udo123",
+    "lastName": "234%Müller",
+    "password": "123",
+    "isAdministrator": true
+}
+
+
+// Rufe den User mit UserID admin ab. 
+###
+GET http://localhost/api/publicUsers/admin
+
+// Failed Test - Rufe den User mit UserID admin ab. 
+###
+GET http://localhost/api/publicUsers/lalalu
+
+
+// Lege zweiten User an. Prüfe UserID sowie den Namen, ob die Angaben korrekt sind.
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "manfred",
+    "firstName": "Susi",
+    "lastName": "Sunkist",
+    "password": "asdf"
+}
+
+// Failed Test - Lege zweiten User an. Prüfe UserID sowie den Namen, ob die Angaben korrekt sind.
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "firstName": "Susi",
+    "lastName": "Sunkist",
+    "password": "asdf"
+}
+
+
+// Failed test
+###
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+    "userID": "manfredqweeeew",
+    "firstName": 5,
+    "lastName": "Sunkist11233343",
+    "password": "asdfqww"
+}
+
+
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/publicUsers/manfred
+Content-Type: application/json
+
+{
+    "firstName": "Marina",
+    "lastName": "Sauerbier"
+}
+
+
+// Failed Test - Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/publicUsers/manfred
+Content-Type: application/json
+
+{
+    "firstName": "Mar23334",
+    "lastName": "1fgfdsjgfr"
+}
+
+// Failed Test - Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/publicUsers/manfred
+Content-Type: application/json
+
+{
+    "userID": "fred"
+}
+
+
+//Failed Test
+###
+PUT http://localhost/api/publicUsers/manfress
+Content-Type: application/json
+
+{
+    "firstName": "Marina",
+    "lastName": "Sauerbier"
+}
+
+
+
+// Rufe alle User ab. Es sollten 2 User zurückgegeben werden.
+###
+GET http://localhost/api/publicUsers
+
+
+
+// failled test - Lösche den User mit der User-ID manfred
+###
+DELETE  http://localhost/api/publicUsers/manfredas
+
+
+
+// Lösche den User mit der User-ID manfred
+###
+DELETE  http://localhost/api/publicUsers/manfred
+
+###
+
+GET http://localhost:80/api/blumentopf/asdf

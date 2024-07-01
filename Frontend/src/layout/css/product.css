@@ -1,0 +1,159 @@
+.page-content{
+  background-color: #f8f9fa;
+}
+
+.mainContainer {
+  margin: 2rem;
+  margin-top: 5rem;
+  padding-top: 0.2rem;
+}
+
+
+.container {
+  max-width: 960px;
+}
+
+.icon-link > .bi {
+  width: .75em;
+  height: .75em;
+}
+
+/*
+ * Custom translucent site header
+ */
+
+.site-header {
+  background-color: rgba(0, 0, 0, .85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+.site-header a {
+  color: #8e8e8e;
+  transition: color .15s ease-in-out;
+}
+.site-header a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+
+.product-device {
+  position: absolute;
+  right: 10%;
+  bottom: -30%;
+  width: 300px;
+  height: 540px;
+  background-color: #333;
+  border-radius: 21px;
+  transform: rotate(30deg);
+}
+
+.product-device::before {
+  position: absolute;
+  top: 10%;
+  right: 10px;
+  bottom: 10%;
+  left: 10px;
+  content: "";
+  background-color: rgba(255, 255, 255, .1);
+
+}
+
+.product-device-2 {
+  top: -25%;
+  right: auto;
+  bottom: 0;
+  left: 5%;
+  background-color: #e5e5e5;
+}
+
+
+/*
+ * Extra utilities
+ */
+
+.flex-equal > * {
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    flex: 1;
+
+  }.mainContainer h1 {
+     font-size: 2.5vw;
+   }
+
+  .mainContainer h2 {
+    font-size: 2.5vw;
+  }
+
+  .mainContainer h3 {
+    font-size: 1vw;
+  }
+
+  .mainContainer p {
+    font-size: 1vw;
+  }
+}
+/* Responsive font size */
+@media (max-width: 768px) {
+  /* Adjust the font size using viewport units */
+  .mainContainer h1 {
+    font-size: 5vw;
+  }
+
+  .mainContainer h2 {
+    font-size: 4vw;
+  }
+
+  .mainContainer h3 {
+    font-size: 3vw;
+  }
+
+  .mainContainer p {
+    font-size: 3vw;
+  }
+
+}
+
+.custom-background {
+  background-image: url('../../layout/icons/haus_grashof.png'); /* Replace 'path/to/your/image.jpg' with the actual path to your image file */
+  background-size: cover; /* Adjust this property to control how the background image is sized */
+  background-position: center; /* Adjust this property to control the position of the background image */
+  background-repeat: no-repeat; /* This property ensures that the background image is not repeated */
+}
+
+
+
+div.bg-body-tertiary {
+  --bs-bg-opacity: 1;
+  background-image: url('../../layout/icons/haus_grashof.png'); /* Replace with the correct path */
+  background-size: cover; /* Adjust this property to control how the background image is sized */
+  background-position: center; /* Adjust this property to control the position of the background image */
+  background-repeat: no-repeat; /* This property ensures that the background image is not repeated */
+  background-color: #f0f0f0; /* Fallback background color */
+  border-radius: 5px;
+}
+
+div.text-bg-dark {
+  --bs-bg-opacity: 1;
+  background-image: url('../../layout/icons/HausGauss.png'); /* Replace with the correct path */
+  background-size: cover; /* Adjust this property to control how the background image is sized */
+  background-position: center; /* Adjust this property to control the position of the background image */
+  background-repeat: no-repeat; /* This property ensures that the background image is not repeated */
+  background-color: #f0f0f0; /* Fallback background color */
+  border-radius: 5px;
+}
+
+div.bg-dark{
+  --bs-bg-opacity: 1;
+  background-image: url('../../layout/icons/HausGauss.png'); /* Replace with the correct path */
+  background-size: cover; /* Adjust this property to control how the background image is sized */
+  background-position: center; /* Adjust this property to control the position of the background image */
+  background-repeat: no-repeat; /* This property ensures that the background image is not repeated */
+  background-color: #f0f0f0; /* Fallback background color */
+  border-radius: 5px;
+}

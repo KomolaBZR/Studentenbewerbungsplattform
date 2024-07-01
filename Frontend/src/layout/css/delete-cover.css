@@ -1,0 +1,76 @@
+/* delete-cover.css */
+
+/* Style for the DeleteUserWidget Button */
+.btn-m-2 {
+    margin: 10px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style for the DeleteUserWidget Modal */
+#DeleteDialogUser {
+    text-align: center;
+}
+
+/* Style for the Modal Header */
+#DeleteDialogUser .modal-header {
+    background-color: #007bff;
+    color: #fff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Style for the Modal Title */
+#DeleteDialogUser .modal-title {
+    font-weight: bold;
+}
+
+/* Style for the Modal Body */
+#DeleteDialogUser .modal-body {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style for the Modal Footer */
+#DeleteDialogUser .modal-footer {
+    border-top: 1px solid #dee2e6;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style for the Cancel Button in the Modal Footer */
+#DeleteDialogCancelButton {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+
+/* Style for the Confirm Button in the Modal Footer */
+#DeleteDialogConfirmButton {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Style for the Delete button */
+#UserItemDeleteButton {
+    background-color: #858d95;
+    color: #fff;
+}
+
+/* Style for the Delete button */
+#UserItemDeleteButton {
+    font-size: 2.5em; /* Adjust the size as needed */
+}
+
+/* Common style for both buttons */
+.common-button {
+    margin: 5px;
+    margin-right: 15px;
+    margin-left: 15px;
+    font-family: 'Arial', sans-serif;
+}
+/*
+
+!* Additional style for margin-bottom on the Delete button *!
+.margin-bottom-delete {
+    margin-bottom: -25px; !* Adjust the margin as needed *!
+}
+*/
+

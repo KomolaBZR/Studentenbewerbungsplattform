@@ -1,0 +1,75 @@
+html {
+    font-size: 14px;
+}
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.container {
+    max-width: 1366px;
+}
+
+.pricing-header {
+    max-width: 700px;
+}
+
+.card-deck .card {
+    min-width: 220px;
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+#UserManagementPage {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+/* UserComponent styles */
+#UserComponent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.button-create-application{
+    margin-bottom: 25px;
+}
+.delete-button-dca{
+    margin-bottom: 25px;
+}
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    #UserManagementPageListComponent {
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+        margin: 10px auto;
+    }
+}
+
+/* Responsive design for larger screens */
+@media (min-width: 769px) {
+    #UserManagementPageListComponent {
+        justify-content: flex-start;
+    }
+
+    .card {
+        width: 25rem;
+        margin: 10px;
+        text-align: left;/* this line to align text to the left */
+    }
+}

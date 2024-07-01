@@ -1,0 +1,88 @@
+/* Style for the loading and error messages */
+.display-6.text-center {
+    margin-top: 50px;
+}
+
+/* Style for the card deck */
+#UserManagementPageListComponent {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Style for individual user cards */
+.card {
+    margin: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for card header */
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Style for card body */
+.card-body {
+    padding: 20px;
+}
+
+/* Style for list items inside the card */
+.card-body ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Style for list item labels */
+.card-body ul li {
+    margin-bottom: 10px;
+}
+
+/* Style for Edit and Delete buttons */
+.card-body button {
+    margin-top: 10px;
+}
+
+/* Style for Edit and Delete buttons in the same line */
+.card-body button {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    #UserManagementPageListComponent {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%;
+        margin: 10px auto;
+    }
+}
+
+/* Responsive design for larger screens */
+@media (min-width: 769px) {
+    #UserManagementPageListComponent {
+        justify-content: flex-start;
+    }
+
+    .card {
+        width: 25rem;
+        margin: 10px;
+    }
+}

@@ -1,0 +1,49 @@
+var degreeCourseService = require('../degreeCourse/DegreeCourseService');
+
+
+
+// Token for  Degree Course authenticated
+function tokenDegreeCourseAuth ( req, res, next ){
+    var { _id } = req.params;
+    var ownerID = req.user.userID;
+
+    degreeCourseService.findDegreeCourseByID(_id, function (err, degreeCourse) {
+        if (degreeCourse) {
+            if (degreeCourse.ownerID === ownerID) {
+                next();
+            } else {
+                console.log("No rights for updating the degree course.");
+                return res.status(401).json({"Error" : "No rights for updating the degree course."});
+            }
+        } else {
+            console.log(err);
+            return res.status(404).json({ "Error": err });
+        }
+    });
+}
+
+
+// Token for  Degree Course Application authenticated
+function tokenDegreeCourseApplicationAuth ( req, res, next ){
+    var { _id } = req.params;
+    var ownerID = req.user.userID;
+
+    degreeCourseApplicationService.findDegreeCourseByID(_id, function (err, degreeCourseApplication) {
+        if (degreeCourseApplication) {
+            if (degreeCourseApplication.applicantUserID === ownerID) {
+                next();
+            } else {
+                console.log("No rights for updating the degree course application.");
+                return res.status(401).json({"Error" : "No rights for updating the degree course application."});
+            }
+        } else {
+            console.log(err);
+            return res.status(404).json({ "Error": err });
+        }
+    });
+}
+
+module.exports = {
+    tokenDegreeCourseAuth,
+    tokenDegreeCourseApplicationAuth
+};
